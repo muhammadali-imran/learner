@@ -29,7 +29,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section className="px-6 lg:px-16 pt-20 pb-24 bg-gradient-to-b from-indigo-50 to-white text-center">
+      <section className="px-6 lg:px-16 pt-20 pb-24 bg-linear-to-b from-indigo-50 to-white text-center">
         <p className="text-purple-600 font-semibold text-sm uppercase tracking-widest mb-4">Your digital classroom</p>
         <h1 className="text-5xl lg:text-6xl font-extrabold text-indigo-950 leading-tight mb-6 max-w-3xl mx-auto">
           Learn without limits, grow without boundaries

@@ -19,7 +19,7 @@ export function useQuiz(quizId) {
 
   const [answers, setAnswers] = useState({})
   const { mutate: submitAttempt, loading: submitting, error: submitError } = useMutation(
-    `/quizzes/${quizId}/submit/`,
+    null,
     'post'
   )
 
@@ -30,14 +30,14 @@ export function useQuiz(quizId) {
   const [result, setResult] = useState(null)
 
   const submit = useCallback(async () => {
-    const payload = Object.entries(answers).map(([question_id, answer]) => ({
-      question_id,
-      answer,
-    }))
-    const data = await submitAttempt({ answers: payload })
-    if (data) setResult(data)
-    return data
-  }, [answers, submitAttempt])
+  const payload = Object.entries(answers).map(([question_id, answer]) => ({
+    question_id,
+    answer,
+  }))
+  const data = await submitAttempt({ answers: payload }, `/quizzes/${quizId}/submit/`)
+  if (data) setResult(data)
+  return data
+}, [answers, quizId, submitAttempt])
 
   const reset = useCallback(() => {
     setAnswers({})
