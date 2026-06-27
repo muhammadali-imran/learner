@@ -1,122 +1,121 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AuthProvider from './contexts/AuthProvider'
+import SidebarProvider from './contexts/SidebarProvider'   
+import ThemeProvider from './contexts/ThemeProvider'       
+import { ToastProvider } from './components/NotificationContext' 
+// import ProtectedRoute from './components/ProtectedRoute'
+import MainLayout from './layouts/MainLayout'
 
-function App() {
-  const [count, setCount] = useState(0)
+// ... rest of page imports
 
+// Public pages
+import LandingPage              from './pages/LandingPage'
+import LoginPage                from './pages/LoginPage'
+import RegisterPage             from './pages/RegisterPage'
+import ForgetPasswordPage       from './pages/ForgetPasswordPage'
+import ResetPasswordPage        from './pages/ResetPasswordPage'
+import EmailVerificationPage    from './pages/EmailVerificationPage'
+import OnboardingPage           from './pages/OnboardingPage'
+import AboutPage                from './pages/AboutPage'
+import PrivacyPolicyPage        from './pages/PrivacyPolicyPage'
+import TermsofServicePage       from './pages/TermsofServicePage'
+import SupportPage              from './pages/SupportPage'
+import NotFoundPage             from './pages/NotFoundPage'
+
+// Protected pages
+import Dashboard                from './pages/LearningManagementDashboard'
+import CourseListPage           from './pages/CourseListPage'
+import CoursePage               from './pages/CoursePage'
+import EnrolledCoursePage       from './pages/EnrolledCoursePage'
+import ClassroomPage            from './pages/ClassroomPage'
+import LecturePage              from './pages/LecturePage'
+import LectureHistory           from './pages/LectureHistory'
+import ELearningPage            from './pages/ELearningPage'
+import QuizPage                 from './pages/QuizPage'
+import QuizHistory              from './pages/QuizHistory'
+import ResultPage               from './pages/ResultPage'
+import AssignmentListPage       from './pages/AssignmentListPage'
+import AssignmentPage           from './pages/AssignmentPage'
+import AttendancePage           from './pages/AttendancePage'
+import GradesPage               from './pages/GradesPage'
+import SchedulePage             from './pages/SchedulePage'
+import DigitalLibrary           from './pages/DigitalLibrary'
+import DiscussionPage           from './pages/DiscussionPage'
+import FeePage                  from './pages/FeePage'
+import PaymentPage              from './pages/PaymentPage'
+import PaymentHistoryPage       from './pages/PaymentHistoryPage'
+import ProfilePage              from './pages/ProfilePage'
+import Settings                 from './pages/Settings'
+import FeedbackPage             from './pages/FeedbackPage'
+import BookmarkPage             from './pages/BookmarkPage'
+import PDFViewer                from './pages/PDFViewer'
+import './index.css'
+
+/*
+function Protected({ children }) {
+  return <ProtectedRoute>{children}</ProtectedRoute>
+}
+*/
+
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <BrowserRouter>
+      <ThemeProvider>
+        <AuthProvider>
+          <SidebarProvider>
+            <ToastProvider>
+              <Routes>
+                {/* ── Public ── */}
+                <Route path="/"                  element={<LandingPage />} />
+                <Route path="/login"             element={<LoginPage />} />
+                <Route path="/register"          element={<RegisterPage />} />
+                <Route path="/forgot-password"   element={<ForgetPasswordPage />} />
+                <Route path="/reset-password"    element={<ResetPasswordPage />} />
+                <Route path="/verify-email"      element={<EmailVerificationPage />} />
+                <Route path="/onboarding"        element={<OnboardingPage />} />
+                <Route path="/about"             element={<AboutPage />} />
+                <Route path="/privacy"           element={<PrivacyPolicyPage />} />
+                <Route path="/terms"             element={<TermsofServicePage />} />
+                <Route path="/support"           element={<SupportPage />} />
 
-      <div className="ticks"></div>
+                {/* ── Protected (inside sidebar layout) ── */}
+                <Route element={<MainLayout/>/*<Protected><MainLayout /></Protected>*/}> 
+                  <Route index path="/dashboard"          element={<Dashboard />} />
+                  <Route path="/courses"                  element={<CourseListPage />} />
+                  <Route path="/courses/:id"              element={<CoursePage />} />
+                  <Route path="/my-courses"               element={<EnrolledCoursePage />} />
+                  <Route path="/classroom"                element={<ClassroomPage />} />
+                  <Route path="/classroom/:id"            element={<ClassroomPage />} />
+                  <Route path="/lectures/:id"             element={<LecturePage />} />
+                  <Route path="/lecture-history"          element={<LectureHistory />} />
+                  <Route path="/elearning"                element={<ELearningPage />} />
+                  <Route path="/quizzes"                  element={<QuizHistory />} />
+                  <Route path="/quizzes/:id"              element={<QuizPage />} />
+                  <Route path="/quizzes/:id/result"       element={<ResultPage />} />
+                  <Route path="/assignments"              element={<AssignmentListPage />} />
+                  <Route path="/assignments/:id"          element={<AssignmentPage />} />
+                  <Route path="/attendance"               element={<AttendancePage />} />
+                  <Route path="/grades"                   element={<GradesPage />} />
+                  <Route path="/schedule"                 element={<SchedulePage />} />
+                  <Route path="/library"                  element={<DigitalLibrary />} />
+                  <Route path="/library/:id"              element={<PDFViewer />} />
+                  <Route path="/discussions"              element={<DiscussionPage />} />
+                  <Route path="/fees"                     element={<FeePage />} />
+                  <Route path="/fees/pay"                 element={<PaymentPage />} />
+                  <Route path="/fees/history"             element={<PaymentHistoryPage />} />
+                  <Route path="/profile"                  element={<ProfilePage />} />
+                  <Route path="/settings"                 element={<Settings />} />
+                  <Route path="/feedback"                 element={<FeedbackPage />} />
+                  <Route path="/bookmarks"                element={<BookmarkPage />} />
+                </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+                {/* Catch-all */}
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </ToastProvider>
+          </SidebarProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
-
-export default App
