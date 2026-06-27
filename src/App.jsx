@@ -23,7 +23,7 @@ import SupportPage              from './pages/SupportPage'
 import NotFoundPage             from './pages/NotFoundPage'
 
 // Protected pages
-import Dashboard                from './pages/LearningManagementDashboard'
+import Dashboard                from './pages/Dashboard'
 import CourseListPage           from './pages/CourseListPage'
 import CoursePage               from './pages/CoursePage'
 import EnrolledCoursePage       from './pages/EnrolledCoursePage'

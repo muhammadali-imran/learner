@@ -42,7 +42,7 @@ export default function Sidebar() {
         `}
       >
         {/* Logo */}
-        <div className={`flex items-center gap-3 px-4 py-5 border-b border-white/10 min-h-[64px] ${!open && 'lg:justify-center lg:px-0'}`}>
+        <div className={`flex items-center gap-3 px-4 py-5 border-b border-white/10 min-h-16 ${!open && 'lg:justify-center lg:px-0'}`}>
           <span className="text-2xl">⚡</span>
           {open && <span className="font-bold text-lg tracking-tight">Learner</span>}
         </div>
