@@ -6,8 +6,10 @@ import ProgressBar from '../components/ProgressBar'
 import Skeleton from '../components/Skeleton'
 import Card, { CardTitle } from '../components/Card'
 import Badge from '../components/Badge'
+import PageHeader from '../components/PageHeader'
 
 export default function Dashboard() {
+
   const { user } = useAuth()
 
   // Fetch data from API – returns { data, loading, error }
@@ -30,12 +32,11 @@ export default function Dashboard() {
   return (
     <div className="space-y-7">
       {/* Greeting */}
-      <div>
-        <h2 className="text-2xl font-bold text-slate-800">
-          {greeting()}, {user?.name?.split(' ')[0] || 'Student'} 👋
-        </h2>
-        <p className="text-slate-500 text-sm mt-1">Here's what's happening with your studies today.</p>
-      </div>
+      
+      <PageHeader 
+        title={`${greeting()}, ${user?.name?.split(' ')[0] || 'Student'} 👋`} 
+        description="Here's what's happening with your studies today." 
+        />
 
       {/* Stats row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">

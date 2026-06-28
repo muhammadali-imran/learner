@@ -8,4 +8,8 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
+   test: {
+    environment: 'happy-dom',
+    setupFiles: ['./src/test-setup.js'],
+  },
 })

@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import AuthLayout from '../layouts/AuthLayout'
 import useAuth from '../hooks/useAuth'
+import InputForm from '../components/InputForm'
 
 const schema = z.object({
   name:            z.string().min(2, 'Name must be at least 2 characters'),
@@ -49,45 +50,10 @@ export default function RegisterPage() {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
-        <Field label="Full name" error={errors.name?.message}>
-          <input
-            type="text"
-            autoComplete="name"
-            placeholder="Ali Hassan"
-            {...register('name')}
-            className={inputClass(errors.name)}
-          />
-        </Field>
-
-        <Field label="Email address" error={errors.email?.message}>
-          <input
-            type="email"
-            autoComplete="email"
-            placeholder="you@school.edu"
-            {...register('email')}
-            className={inputClass(errors.email)}
-          />
-        </Field>
-
-        <Field label="Password" error={errors.password?.message}>
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder="At least 8 characters"
-            {...register('password')}
-            className={inputClass(errors.password)}
-          />
-        </Field>
-
-        <Field label="Confirm password" error={errors.confirmPassword?.message}>
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder="••••••••"
-            {...register('confirmPassword')}
-            className={inputClass(errors.confirmPassword)}
-          />
-        </Field>
+        <InputForm label="Full name" registration={register('name')} error={errors.name?.message} required />
+        <InputForm label="Email address" type="email" registration={register('email')} error={errors.email?.message} required />
+        <InputForm label="Password" type="password" registration={register('password')} error={errors.password?.message} required hint="At least 8 characters" />
+        <InputForm label="Confirm password" type="password" registration={register('confirmPassword')} error={errors.confirmPassword?.message} required />
 
         <button
           type="submit"
@@ -106,22 +72,4 @@ export default function RegisterPage() {
       </p>
     </AuthLayout>
   )
-}
-
-function Field({ label, error, children }) {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1.5">{label}</label>
-      {children}
-      {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
-    </div>
-  )
-}
-
-function inputClass(error) {
-  return `w-full px-4 py-3 rounded-xl border text-slate-800 text-sm placeholder-slate-400 outline-none transition-shadow
-    ${error
-      ? 'border-red-400 focus:ring-2 focus:ring-red-200'
-      : 'border-slate-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100'
-    }`
 }

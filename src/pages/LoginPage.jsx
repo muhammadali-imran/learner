@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import AuthLayout from '../layouts/AuthLayout'
 import useAuth from '../hooks/useAuth'
+import InputForm from '../components/InputForm'
 
 const schema = z.object({
   email:    z.string().email('Enter a valid email'),
@@ -47,25 +48,22 @@ export default function LoginPage() {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
-        <Field label="Email address" error={errors.email?.message}>
-          <input
-            type="email"
-            autoComplete="email"
-            placeholder="you@school.edu"
-            {...register('email')}
-            className={inputClass(errors.email)}
-          />
-        </Field>
-
-        <Field label="Password" error={errors.password?.message}>
-          <input
-            type="password"
-            autoComplete="current-password"
-            placeholder="••••••••"
-            {...register('password')}
-            className={inputClass(errors.password)}
-          />
-        </Field>
+        <InputForm
+          label="Email address"
+          type="email"
+          placeholder="you@school.edu"
+          registration={register('email')}
+          error={errors.email?.message}
+          required
+        />
+        <InputForm
+          label="Password"
+          type="password"
+          placeholder="••••••••"
+          registration={register('password')}
+          error={errors.password?.message}
+          required
+        />
 
         <div className="flex justify-end">
           <Link to="/forgot-password" className="text-sm text-purple-600 hover:underline">
@@ -90,22 +88,4 @@ export default function LoginPage() {
       </p>
     </AuthLayout>
   )
-}
-
-function Field({ label, error, children }) {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1.5">{label}</label>
-      {children}
-      {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
-    </div>
-  )
-}
-
-function inputClass(error) {
-  return `w-full px-4 py-3 rounded-xl border text-slate-800 text-sm placeholder-slate-400 outline-none transition-shadow
-    ${error
-      ? 'border-red-400 focus:ring-2 focus:ring-red-200'
-      : 'border-slate-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100'
-    }`
 }
