@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import ErrorBoundary from './components/ErrorBoundary.jsx'
+import ErrorBoundary from '@shared/components/layout/ErrorBoundary'
 import './index.css'
-import App from './App.jsx'
+import App from '@app/App'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
-      <App /> 
-  </ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>,
 )

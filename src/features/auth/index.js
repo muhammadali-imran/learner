@@ -1,0 +1,7 @@
+export { default as LoginPage } from './pages/LoginPage'
+export { default as RegisterPage } from './pages/RegisterPage'
+export { default as ForgetPasswordPage } from './pages/ForgetPasswordPage'
+export { default as ResetPasswordPage } from './pages/ResetPasswordPage'
+export { default as EmailVerificationPage } from './pages/EmailVerificationPage'
+export { default as useAuth } from '@shared/hooks/useAuth'
+export { authRoutes } from './routes'

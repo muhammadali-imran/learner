@@ -1,0 +1,5 @@
+export { default as ClassroomPage } from './pages/ClassroomPage'
+export { default as AttendancePage } from './pages/AttendancePage'
+export { default as DiscussionPage } from './pages/DiscussionPage'
+export { useAttendance } from './hooks/useAttendance'
+export { classroomRoutes } from './routes'

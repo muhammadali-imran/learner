@@ -1,0 +1,5 @@
+export { default as PrivacyPolicyPage } from './pages/PrivacyPolicyPage'
+export { default as TermsofServicePage } from './pages/TermsofServicePage'
+export { default as SupportPage } from './pages/SupportPage'
+export { default as NotFoundPage } from './pages/NotFoundPage'
+export { legalRoutes } from './routes'

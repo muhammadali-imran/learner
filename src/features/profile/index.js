@@ -1,0 +1,6 @@
+export { default as ProfilePage } from './pages/ProfilePage'
+export { default as Settings } from './pages/Settings'
+export { default as OnboardingPage } from './pages/OnboardingPage'
+export { default as FeedbackPage } from './pages/FeedbackPage'
+export { useProfile } from './hooks/useProfile'
+export { profileRoutes } from './routes'
