@@ -34,7 +34,7 @@ export default function Timeline({ items = [], className = '' }) {
           <li key={item.id ?? idx} className="relative flex gap-4 pb-6 last:pb-0">
             {/* Vertical line */}
             {!isLast && (
-              <span className="absolute left-[13px] top-7 bottom-0 w-px bg-slate-200" aria-hidden="true" />
+              <span className="absolute left-3.25 top-7 bottom-0 w-px bg-slate-200" aria-hidden="true" />
             )}
 
             {/* Dot / icon */}
