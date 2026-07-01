@@ -1,6 +1,10 @@
 @import 'styles/fonts.css';
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+}
+
 /* GSAP Compatibility: No CSS transitions on animated elements */
 .gsap-animate,
 .gsap-stagger,
